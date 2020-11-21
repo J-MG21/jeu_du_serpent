@@ -45,20 +45,58 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             this.leJeu = _leJeu;
 
-        }
-        verifTouche(evt){
+            this.currentX = -1;
+            this.currentY = 0;
+            this.nextMoveX = 1;
+            this.nextMoveY = 0;
 
+            this.serpentLongueur = 1
+            this.tblCarreSerpent = [];
+
+            this.vitesse = 250;
+            this.timing = setInterval(this.controleSerpent.bind(this), this.vitesse);
+
+            document.addEventListener("keydown", this.verifTouche.bind(this));
+
+        }
+        verifTouche(_evt){
+            var evt = _evt;
+
+            this.deplacement(evt.keyCode);
         }
 
         deplacement(dirCode){
+            switch (dirCode){
+                case 37:
+                    this.nextMoveX = -1;
+                    this.nextMoveY = 0;
+                    break;
+                case 38:
+                    this.nextMoveX = 0;
+                    this.nextMoveY = -1;
+                    break;
+                case 39:
+                    this.nextMoveX = 1;
+                    this.nextMoveY = 0;
+                    break;
+                case 40:
+                    this.nextMoveX = 0;
+                    this.nextMoveY = 1;
+                    break;
+            }
 
         }
 
         controleSerpent(){
+            var nextX = this.currentX + this.nextMoveX;
+            var nextY = this.currentY + this.nextMoveY;
 
+            this.dessinneCarre(nextX, nextY);
+            this.currentX = nextX;
+            this.currentY = nextY;
         }
 
-        desinneCarre(x, y){
+        dessinneCarre(x, y){
 
         }
 
